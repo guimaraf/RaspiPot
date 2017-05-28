@@ -1,0 +1,24 @@
+
+
+28/05/2017 19:31:01 Criado por Frederico Oliveira e Lucas Cassiano versão atual: 12032017.1
+28/05/2017 19:33:29 Fred_Oliveira comando executado: /currency Windows
+28/05/2017 19:33:41 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:35:26 Fred_Oliveira comando executado: /roll Windows
+28/05/2017 19:35:31 Fred_Oliveira comando executado: /time Windows
+28/05/2017 19:35:40 Fred_Oliveira comando executado: /cput Windows
+28/05/2017 19:35:46 Fred_Oliveira comando executado: /weather Windows
+28/05/2017 19:36:35 Fred_Oliveira comando executado: /currency Windows
+28/05/2017 19:36:43 Fred_Oliveira comando executado: /uptime Windows
+28/05/2017 19:36:49 Fred_Oliveira comando executado: /loop Windows
+28/05/2017 19:44:12 Fred_Oliveira comando executado: /currency Windows
+28/05/2017 19:44:19 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:45:00 Fred_Oliveira comando executado: /roll Windows
+28/05/2017 19:45:04 Fred_Oliveira comando executado: /currency Windows
+28/05/2017 19:45:18 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:46:04 Fred_Oliveira comando executado: /roll Windows
+28/05/2017 19:46:14 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:46:30 Fred_Oliveira comando executado: /roll Windows
+28/05/2017 19:46:33 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:51:11 Fred_Oliveira comando executado: /loop Windows
+28/05/2017 19:51:21 Fred_Oliveira comando executado: /help Windows
+28/05/2017 19:51:25 Fred_Oliveira comando executado: /loop Windows
