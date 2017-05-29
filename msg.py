@@ -83,7 +83,6 @@ def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):
     arquivolog.write('\n'+ dataMensagemLog + ' ' + usuarioLog + ' comando executado: ' + commandLog + ' ' + sistemaOperacionalLog)
     arquivolog.close()
 
-
 #Foi criado esta função para que seja chamada no início do código, futuramente estruturar o código para verificar o sistema operacional
 def verificarSistemaOperacional():
     so = platform.system()
@@ -155,4 +154,4 @@ def tempoLigado(sistemaOP):
     return mensagemTxt
 
 while 1:
-    time.sleep(10)    
+    time.sleep(10)
