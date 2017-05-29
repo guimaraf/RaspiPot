@@ -41,7 +41,7 @@ def handle(msg):
         bot.sendMessage(chat_id, mensagemTxt)
 
     elif (command == '/loop'):
-        linhas = frasesAleatorias()
+        linhas = frasesAleatorias(sistemaOperacional)
         bot.sendMessage(chat_id, linhas)
 	
     elif (command == '/weather'):
@@ -49,7 +49,7 @@ def handle(msg):
         bot.sendMessage(chat_id, dadosColetados)
 
     elif (command == '/currency'):
-        mensagemTxt = cotacaoDolar(sistemaOperacional)
+        mensagemTxt = cotacaoDolar()
         bot.sendMessage(chat_id, mensagemTxt)
 	
     elif (command == '/uptime'):
@@ -57,7 +57,11 @@ def handle(msg):
         bot.sendMessage(chat_id, mensagemTxt)
         
     else:
-        bot.sendMessage(chat_id, "Comando não cadastrado")
+        if(sistemaOperacional == "Windows"):
+            bot.sendMessage(chat_id, "Comando nao cadastrado")
+        else:
+            bot.sendMessage(chat_id, "Comando não cadastrado")
+        
     print(usuario, dataMensagem, '\n')
     GravarLog(sistemaOperacional, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
 
@@ -92,7 +96,7 @@ def verificarSistemaOperacional():
 #EM DESENVOLVIMENTO falta testar no raspi, no windows está retornando normalmente
 def consultarTemperatura(sistemaOP):
     if(sistemaOP == "Windows"):
-        temperatura = "Não existe o comando no Windows"
+        temperatura = "Nao existe o comando no Windows" 
     else:
         temperatura = open('/opt/vc/bin/vcgencmd measure_temp').read() #Modificado o comando para já retornar para graus celcius
         temperatura.close()
@@ -119,26 +123,30 @@ def consultarAjuda():
     return arquivoHelp
     arquivoHelp.close()
 
-def frasesAleatorias():
-    lines = open('temp/frases.txt').read().encode("latin-1").splitlines()
+def frasesAleatorias(sistemaOP):
+    if (sistemaOP == "Windows"):
+        lines = open('temp/frases.txt').read().encode("latin-1").splitlines()
+    else:
+        lines = open('temp/frases.txt').read().splitlines()
+        
     lines = random.choice(lines)
     return lines
     #lines.close()
 
-def cotacaoDolar(sistemaOP):
+def cotacaoDolar():
     requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
     resposta = json.loads(requisicao.text)
     valores = ''
-    valores += ('Dólar ' + str(resposta['valores']['USD']['valor']) + '\n'+
-                'Euro ' + str(resposta['valores']['EUR']['valor']) + '\n'+
-                'Libra ' + str(resposta['valores']['GBP']['valor']) + '\n'+
-                'Bitcoin ' + str(resposta['valores']['BTC']['valor']) + '\n\n'
+    valores += ('Dolar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
+                'Euro R$' + str(resposta['valores']['EUR']['valor']) + '\n'+
+                'Libra R$' + str(resposta['valores']['GBP']['valor']) + '\n'+
+                'Bitcoin R$' + str(resposta['valores']['BTC']['valor']) + '\n\n' +
                 'Generate by http://api.promasters.net.br/cotacao/')
     return(valores)
 
 def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
-        mensagemTxt = "Comando não encontrado no Windows"
+        mensagemTxt = "Comando nao encontrado no Windows"
     else:
         os.system("uptime > temp.txt")
         arquivo = open('temp.txt', 'r') 
