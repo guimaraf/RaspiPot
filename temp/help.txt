@@ -1,10 +1,9 @@
 Comandos cadastrados
-"Nao utilizado caracteres especiais"
 
-/cput = Retorna temperatura do processador
+/cput = Retorna temperatura do processador "Apenas Linux"
+/uptime - Verifica quanto tempo está ligado o equipamento "Apenas Linux"
 /roll = Retorna um valor entre 1 ate 6
 /time = Retorna a hora do sistema
 /loop = Faz um loop retornando 20 mensagens
-/weather - Informacoes meteorologicas de Belo Horizonte
-/currency - Cotacao de moedas (Dolar, Euro, Libra, Bitcoin)
-/uptime - Verifica quanto tempo está ligado o equipamento
+/weather - Informações meteorológicas de Belo Horizonte
+/currency - Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)

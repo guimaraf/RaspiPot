@@ -1,4 +1,5 @@
- # This Python file uses the following encoding: utf-8
+# -*- coding: latin-1 -*-
+
 import time
 import random
 import datetime
@@ -9,7 +10,7 @@ import json
 import requests
 import platform
 
-versao ="12032017.1"
+versao ="280517.1"
 
 print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versao: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
@@ -114,12 +115,12 @@ def coletarDadosAtmosfericos():
 
 #Consultando ajuda
 def consultarAjuda():
-    arquivoHelp = open('temp/help.txt', 'r').read()
+    arquivoHelp = open('temp/help.txt', 'r').read().encode("latin-1")
     return arquivoHelp
     arquivoHelp.close()
 
 def frasesAleatorias():
-    lines = open('temp/frases.txt').read().splitlines()
+    lines = open('temp/frases.txt').read().encode("latin-1").splitlines()
     lines = random.choice(lines)
     return lines
     #lines.close()
