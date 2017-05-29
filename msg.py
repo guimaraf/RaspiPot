@@ -113,7 +113,7 @@ def coletarDadosAtmosfericos():
     dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/'
     return dadosColetados
 
-#Consultando ajuda
+#Consultando ajuda no
 def consultarAjuda():
     arquivoHelp = open('temp/help.txt', 'r').read().encode("latin-1")
     return arquivoHelp
