@@ -140,9 +140,10 @@ def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
         mensagemTxt = "Comando não encontrado no Windows"
     else:
-        os.system("uptime > temp.txt")
+        os.system("./Shell/my-pi-temp.sh")
         arquivo = open('temp.txt', 'r') 
         mensagemTxt = arquivo.read()
+        bot.sendMessage(chat_id, mensagemTxt)
         arquivo.close()
     return mensagemTxt
 
