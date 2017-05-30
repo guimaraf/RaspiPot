@@ -1,4 +1,4 @@
-# -*- coding: latin-1 -*-
+#coding: utf-8
 
 import time
 import random
@@ -10,9 +10,9 @@ import json
 import requests
 import platform
 
-versao ="280517.1"
+versao ="290517.1"
 
-print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versao: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
+print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
 tokenColetaTxt = open('token.txt', 'r')
 idToken = tokenColetaTxt.read()
@@ -41,7 +41,7 @@ def handle(msg):
         bot.sendMessage(chat_id, mensagemTxt)
 
     elif (command == '/loop'):
-        linhas = frasesAleatorias(sistemaOperacional)
+        linhas = frasesAleatorias()
         bot.sendMessage(chat_id, linhas)
 	
     elif (command == '/weather'):
@@ -57,10 +57,7 @@ def handle(msg):
         bot.sendMessage(chat_id, mensagemTxt)
         
     else:
-        if(sistemaOperacional == "Windows"):
-            bot.sendMessage(chat_id, "Comando nao cadastrado")
-        else:
-            bot.sendMessage(chat_id, "Comando não cadastrado")
+        bot.sendMessage(chat_id, "Comando não cadastrado")
         
     print(usuario, dataMensagem, '\n')
     GravarLog(sistemaOperacional, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
@@ -118,16 +115,12 @@ def coletarDadosAtmosfericos():
 
 #Consultando ajuda no
 def consultarAjuda():
-    arquivoHelp = open('temp/help.txt', 'r').read().encode("latin-1")
+    arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
     return arquivoHelp
     arquivoHelp.close()
 
-def frasesAleatorias(sistemaOP):
-    if (sistemaOP == "Windows"):
-        lines = open('temp/frases.txt').read().encode("latin-1").splitlines()
-    else:
-        lines = open('temp/frases.txt').read().splitlines()
-        
+def frasesAleatorias():
+    lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
     lines = random.choice(lines)
     return lines
     #lines.close()
@@ -136,7 +129,7 @@ def cotacaoDolar():
     requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
     resposta = json.loads(requisicao.text)
     valores = ''
-    valores += ('Dolar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
+    valores += ('Dólar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
                 'Euro R$' + str(resposta['valores']['EUR']['valor']) + '\n'+
                 'Libra R$' + str(resposta['valores']['GBP']['valor']) + '\n'+
                 'Bitcoin R$' + str(resposta['valores']['BTC']['valor']) + '\n\n' +
@@ -145,7 +138,7 @@ def cotacaoDolar():
 
 def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
-        mensagemTxt = "Comando nao encontrado no Windows"
+        mensagemTxt = "Comando não encontrado no Windows"
     else:
         os.system("uptime > temp.txt")
         arquivo = open('temp.txt', 'r') 
