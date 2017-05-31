@@ -1,4 +1,0 @@
-29/05/2017 23:07:31 Criado por Frederico Oliveira e Lucas Cassiano vers�o atual: 280517.1
-29/05/2017 23:07:40 Fred_Oliveira comando executado: /loop Windows
-29/05/2017 23:07:44 Fred_Oliveira comando executado: /time Windows
-29/05/2017 23:07:54 Fred_Oliveira comando executado: /currency Windows

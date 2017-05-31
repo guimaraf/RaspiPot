@@ -10,7 +10,8 @@ import json
 import requests
 import platform
 
-versao ="290517.1"
+versao = "0.5.1"
+dataVersao = "Última atualização dia 31/05/2017, versão 1"
 
 print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
@@ -23,6 +24,8 @@ def handle(msg):
     command = msg['text']
     dataMensagem = time.strftime('%d/%m/%Y %H:%M:%S')
     sistemaOperacional = verificarSistemaOperacional() #Detectando a versão do sistema operacional e retornando uma string
+
+    global versao, dataVersao
 
     print('Comando executado: ', command)
     
@@ -55,6 +58,16 @@ def handle(msg):
     elif (command == '/uptime'):
         mensagemTxt = tempoLigado(sistemaOperacional)
         bot.sendMessage(chat_id, mensagemTxt)
+
+    elif (command == '/version'):
+        mensagemTxt = "Versão " + versao + ", " + dataVersao
+        bot.sendMessage(chat_id, mensagemTxt)
+    
+    elif (command == '/print'):
+        bot.sendMessage(chat_id, "Carregando foto...")
+        img = open('img/rola.jpg', 'rb')
+        bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
+        img.close()
         
     else:
         bot.sendMessage(chat_id, "Comando não cadastrado")
