@@ -11,7 +11,7 @@ import requests
 import platform
 
 versao = "0.5.1"
-dataVersao = "Última atualização dia 31/05/2017, versão 1"
+dataVersao = "Última atualização dia 31/05/2017, versão 2"
 
 print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
@@ -63,7 +63,7 @@ def handle(msg):
         mensagemTxt = "Versão " + versao + ", " + dataVersao
         bot.sendMessage(chat_id, mensagemTxt)
     
-    elif (command == '/print'):
+    elif (command == '/memes'):
         bot.sendMessage(chat_id, "Carregando foto...")
         img = open('img/rola.jpg', 'rb')
         bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
@@ -81,7 +81,7 @@ bot.message_loop(handle)
 #Gerando o log inicial
 print("Aguardando comandos...")
 arquivolog = open('log.txt', 'a')
-arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado por Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
+arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado p Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
 arquivolog.close()
 
 '''
@@ -107,9 +107,10 @@ def consultarTemperatura(sistemaOP):
     if(sistemaOP == "Windows"):
         temperatura = "Nao existe o comando no Windows" 
     else:
-        temperatura = open('/opt/vc/bin/vcgencmd measure_temp').read() #Modificado o comando para já retornar para graus celcius
-        temperatura.close()
-    return temperatura
+	os.system("Shell/my-pi-temp.sh > temp/temp.txt")
+	temperatura = open('temp/temp.txt', 'r').read()
+	return temperatura
+	temperatura.close()
 
 #Coletando dados atmoféricos
 def coletarDadosAtmosfericos():
@@ -128,12 +129,12 @@ def coletarDadosAtmosfericos():
 
 #Consultando ajuda no
 def consultarAjuda():
-    arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
+    arquivoHelp = open('temp/help.txt', 'r').read()
     return arquivoHelp
     arquivoHelp.close()
 
 def frasesAleatorias():
-    lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
+    lines = open('temp/frases.txt', 'r').read().splitlines()
     lines = random.choice(lines)
     return lines
     #lines.close()
@@ -148,17 +149,15 @@ def cotacaoDolar():
                 'Bitcoin R$' + str(resposta['valores']['BTC']['valor']) + '\n\n' +
                 'Generate by http://api.promasters.net.br/cotacao/')
     return(valores)
-
+	
 def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
         mensagemTxt = "Comando não encontrado no Windows"
     else:
-        os.system("./Shell/my-pi-temp.sh")
-        arquivo = open('temp.txt', 'r') 
-        mensagemTxt = arquivo.read()
-        bot.sendMessage(chat_id, mensagemTxt)
-        arquivo.close()
-    return mensagemTxt
+	os.system("uptime > temp/temp.txt")
+	mensagemTxt = open('temp/temp.txt', 'r').read()
+	return mensagemTxt
+	mensagemTxt.close()
 
 while 1:
     time.sleep(10)
