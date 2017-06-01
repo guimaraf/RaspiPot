@@ -1,9 +1,11 @@
 Comandos cadastrados
 
-/cput = Retorna temperatura do processador "Apenas Linux"
-/uptime - Verifica quanto tempo está ligado o equipamento "Apenas Linux"
-/roll = Retorna um valor entre 1 ate 6
+/roll = Retorna um valor entre 1 ate 10
 /time = Retorna a hora do sistema
+/cput = Retorna temperatura do processador "Apenas Linux"
 /loop = Faz um loop retornando 20 mensagens
-/weather - Informações meteorológicas de Belo Horizonte
-/currency - Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)
+/weather = Informações meteorológicas de Belo Horizonte
+/currency = Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)
+/uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"
+/version = Versão do Bot
+/memes = Descubra :)
