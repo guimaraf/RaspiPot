@@ -10,8 +10,8 @@ import json
 import requests
 import platform
 
-versao = "0.5.1"
-dataVersao = "Última atualização dia 31/05/2017, versão 1"
+versao = "0.5.2"
+dataVersao = "Última atualização dia 02/06/2017, versão 1"
 
 print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
@@ -33,7 +33,7 @@ def handle(msg):
         bot.sendMessage(chat_id, random.randint(1,10))
 
     elif(command == '/help' or command == '/start'):
-        helpLeitura = consultarAjuda()
+        helpLeitura = consultarAjuda(sistemaOperacional)
         bot.sendMessage(chat_id, helpLeitura)
 
     elif (command == '/time'):
@@ -44,7 +44,7 @@ def handle(msg):
         bot.sendMessage(chat_id, mensagemTxt)
 
     elif (command == '/loop'):
-        linhas = frasesAleatorias()
+        linhas = frasesAleatorias(sistemaOperacional)
         bot.sendMessage(chat_id, linhas)
 	
     elif (command == '/weather'):
@@ -68,7 +68,7 @@ def handle(msg):
         img = open('img/rola.jpg', 'rb')
         bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
         img.close()
-        
+
     else:
         bot.sendMessage(chat_id, "Comando não cadastrado")
         
@@ -81,7 +81,7 @@ bot.message_loop(handle)
 #Gerando o log inicial
 print("Aguardando comandos...")
 arquivolog = open('log.txt', 'a')
-arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado por Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
+arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado p Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
 arquivolog.close()
 
 '''
@@ -107,7 +107,8 @@ def consultarTemperatura(sistemaOP):
     if(sistemaOP == "Windows"):
         temperatura = "Nao existe o comando no Windows" 
     else:
-        temperatura = open('/opt/vc/bin/vcgencmd measure_temp').read() #Modificado o comando para já retornar para graus celcius
+        os.system("Shell/my-pi-temp.sh > temp/temp.txt")
+        temperatura = open('temp/temp.txt', 'r').read()
         temperatura.close()
     return temperatura
 
@@ -127,16 +128,25 @@ def coletarDadosAtmosfericos():
     return dadosColetados
 
 #Consultando ajuda no
-def consultarAjuda():
-    arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
+def consultarAjuda(sistemOP):
+    if (sistemOP == "Windows"):
+        arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
+    else:
+        arquivoHelp = open('temp/help.txt', 'r').read()
+    
     return arquivoHelp
     arquivoHelp.close()
 
-def frasesAleatorias():
-    lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
+def frasesAleatorias(sistemOP):
+    if(sistemOP == "Windows"):
+        lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
+        
+    else:
+        lines = open('temp/frases.txt', 'r').read().splitlines()
+            
     lines = random.choice(lines)
     return lines
-    #lines.close()
+    lines.close()
 
 def cotacaoDolar():
     requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
@@ -153,10 +163,10 @@ def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
         mensagemTxt = "Comando não encontrado no Windows"
     else:
-        os.system("./Shell/my-pi-temp.sh")
+        os.system("uptime > temp/temp.txt")
+        #os.system("./Shell/my-pi-temp.sh")
+        mensagemTxt = open('temp/temp.txt', 'r').read()
         arquivo = open('temp.txt', 'r') 
-        mensagemTxt = arquivo.read()
-        bot.sendMessage(chat_id, mensagemTxt)
         arquivo.close()
     return mensagemTxt
 

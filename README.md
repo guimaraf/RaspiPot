@@ -10,3 +10,6 @@ Pacote telepot
 https://github.com/nickoala/telepot
 
 Crie um arquivo com o nome token.txt e coloque o seu código de acesso a API do telegran, será algo similar a "123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ", que deve ser gerado dentro do telegran
+
+Material de consulta Telepot
+https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets
