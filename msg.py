@@ -109,8 +109,8 @@ def consultarTemperatura(sistemaOP):
     else:
         os.system("Shell/my-pi-temp.sh > temp/temp.txt")
         temperatura = open('temp/temp.txt', 'r').read()
-        temperatura.close()
-    return temperatura
+	return temperatura
+	temperatura.close()
 
 #Coletando dados atmoféricos
 def coletarDadosAtmosfericos():
@@ -166,9 +166,9 @@ def tempoLigado(sistemaOP):
         os.system("uptime > temp/temp.txt")
         #os.system("./Shell/my-pi-temp.sh")
         mensagemTxt = open('temp/temp.txt', 'r').read()
-        arquivo = open('temp.txt', 'r') 
-        arquivo.close()
-    return mensagemTxt
+        arquivo = open('temp/temp.txt', 'r') 
+	return mensagemTxt
+	arquivo.close()		
 
 while 1:
     time.sleep(10)
