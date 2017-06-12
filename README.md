@@ -2,16 +2,16 @@
 
 Esta aplicação foi criada como Hobby para estudos com Raspiberry + Python, usando o Telegran, foram adicionados alguns comandos e que retornam informações diversas, conforme lista abaixo.
 
-/roll = Retorna um valor entre 1 ate 10
-/time = Retorna a hora do sistema
-/cput = Retorna temperatura do processador "Apenas Linux"
-/loop = Faz um loop retornando 20 mensagens
-/weather = Informações meteorológicas de Belo Horizonte
-/currency = Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)
-/uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"
-/version = Versão do Bot
-/print = Envia uma imagem de uma rola
-/Meme = Envia um link de um meme randômico
+/roll = Retorna um valor entre 1 ate 10</br>
+/time = Retorna a hora do sistema</br>
+/cput = Retorna temperatura do processador "Apenas Linux"</br>
+/loop = Faz um loop retornando 20 mensagens</br>
+/weather = Informações meteorológicas de Belo Horizonte</br>
+/currency = Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)</br>
+/uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"</br>
+/version = Versão do Bot</br>
+/print = Envia uma imagem de uma rola</br>
+/Meme = Envia um link de um meme randômico</br>
 
 
 Foram utilizados diversos módulos, vários deles já vem instalados por padrão.
