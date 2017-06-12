@@ -1,15 +1,40 @@
 # RaspiPot
 
+Esta aplicação foi criada como Hobby para estudos com Raspiberry + Python, usando o Telegran, foram adicionados alguns comandos e que retornam informações diversas, conforme lista abaixo.
+
+/roll = Retorna um valor entre 1 ate 10
+/time = Retorna a hora do sistema
+/cput = Retorna temperatura do processador "Apenas Linux"
+/loop = Faz um loop retornando 20 mensagens
+/weather = Informações meteorológicas de Belo Horizonte
+/currency = Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)
+/uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"
+/version = Versão do Bot
+/print = Envia uma imagem de uma rola
+/Meme = Envia um link de um meme randômico
+
+
 Foram utilizados diversos módulos, vários deles já vem instalados por padrão.
+time, random, datetime, os, subprocess, platform, telepot, json, requests 
 
-time, random, datetime, os, subprocess, json, requests, platform, telepot
+Foi utilizado um exemplo básico de envio de mensagens 
 
-https://github.com/kennethreitz/requests
-
-Pacote telepot
+Instalar telepot
 https://github.com/nickoala/telepot
 
-Crie um arquivo com o nome token.txt e coloque o seu código de acesso a API do telegran, será algo similar a "123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ", que deve ser gerado dentro do telegran
+Documentação do Modulo Json
+https://docs.python.org/3/library/json.html
 
-Material de consulta Telepot
-https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets
+Como módulo Requests
+https://github.com/kennethreitz/requests
+
+Inicialmente para utilizar o bot no Telegran, é necessário ter o token, que é gerado pelo BotFather, instruções no link https://core.telegram.org/bots#6-botfather
+Para este Bot, eu utilizei um arquivo externo, que atualmente não está no projeto, sendo necessário que você crie o arquivo com o nome "token.txt", depois inserir o seu token no arquivo na raiz da aplicação.
+
+Foi utilizado outras APIs, com funções diversas como:
+
+Coleta de dados atmosféricos https://api.hgbrasil.com/weather/
+
+Coleta de dados financeiros em relação a moeda brasileira http://api.promasters.net.br/cotacao/
+
+#Organizar o documento posteriormente

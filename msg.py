@@ -1,9 +1,8 @@
 #coding: utf-8
-
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-versao = "0.5.2"
-dataVersao = "Última atualização dia 02/06/2017, versão 1"
+versao = "0.5.3"
+dataVersao = "Última atualização dia 12/06/2017, versão 1"
 
 print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
 
@@ -60,6 +59,10 @@ def handle(msg):
         img = open('img/rola.jpg', 'rb')
         bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
         img.close()
+        
+    elif (command == '/meme'):
+        mensagemTxt = imagensRandom()
+        bot.sendMessage(chat_id, mensagemTxt)
 
     else:
         bot.sendMessage(chat_id, "Comando não cadastrado")
@@ -140,15 +143,20 @@ def frasesAleatorias(sistemOP):
     lines.close()
 
 def cotacaoDolar():
-    requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
-    resposta = json.loads(requisicao.text)
-    valores = ''
-    valores += ('Dólar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
+    try:
+        requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
+        resposta = json.loads(requisicao.text)
+        valores = ''
+        valores += ('Dólar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
                 'Euro R$' + str(resposta['valores']['EUR']['valor']) + '\n'+
                 'Libra R$' + str(resposta['valores']['GBP']['valor']) + '\n'+
                 'Bitcoin R$' + str(resposta['valores']['BTC']['valor']) + '\n\n' +
                 'Generate by http://api.promasters.net.br/cotacao/')
-    return(valores)
+        return(valores)
+    
+    except:
+        return("Erro ao acessar a API")
+        #Pode ser colocado outra API na consulta, assim sempre o código vai retornar alguma informação
 
 def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):
@@ -160,6 +168,12 @@ def tempoLigado(sistemaOP):
         arquivo = open('temp.txt', 'r') 
     return mensagemTxt
     arquivo.close()
+
+def imagensRandom():
+    lines = open('temp/imagens.txt', 'r').read().splitlines()
+    lines = random.choice(lines)
+    return lines
+    lines.close()
 
 while 1:
     time.sleep(10)
