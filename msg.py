@@ -1,14 +1,6 @@
 #coding: utf-8
 
-import time
-import random
-import datetime
-import telepot
-import os
-import subprocess
-import json
-import requests
-import platform
+import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
 versao = "0.5.2"
 dataVersao = "Última atualização dia 02/06/2017, versão 1"
@@ -109,8 +101,8 @@ def consultarTemperatura(sistemaOP):
     else:
         os.system("Shell/my-pi-temp.sh > temp/temp.txt")
         temperatura = open('temp/temp.txt', 'r').read()
-        temperatura.close()
     return temperatura
+    temperatura.close()
 
 #Coletando dados atmoféricos
 def coletarDadosAtmosfericos():
@@ -118,13 +110,14 @@ def coletarDadosAtmosfericos():
     url = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
     teste = json.loads(url.content)
 
-    dados_array = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset', 'date', 'time']
-    informacao_user = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ', '','']
-    completa = ['°C', '', '', '', '%', '', '', '', '', '']
+    dados_array = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset']
+    informacao_user = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
+    completa = ['°C', '', '', '', '%', '', '', '']
 
     for i in range(0, len(dados_array)):
         dadosColetados += (informacao_user[i] + str(teste['results'][dados_array[i]]) + completa[i] + '\n').replace(',', '')
-    dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/'
+        
+    dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/ at {} {}'.format((teste['results']['date']),(teste['results']['time']))
     return dadosColetados
 
 #Consultando ajuda no
@@ -133,14 +126,12 @@ def consultarAjuda(sistemOP):
         arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
     else:
         arquivoHelp = open('temp/help.txt', 'r').read()
-    
     return arquivoHelp
     arquivoHelp.close()
 
 def frasesAleatorias(sistemOP):
     if(sistemOP == "Windows"):
         lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
-        
     else:
         lines = open('temp/frases.txt', 'r').read().splitlines()
             
@@ -167,8 +158,8 @@ def tempoLigado(sistemaOP):
         #os.system("./Shell/my-pi-temp.sh")
         mensagemTxt = open('temp/temp.txt', 'r').read()
         arquivo = open('temp.txt', 'r') 
-        arquivo.close()
     return mensagemTxt
+    arquivo.close()
 
 while 1:
     time.sleep(10)
