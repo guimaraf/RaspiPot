@@ -10,7 +10,7 @@ Esta aplicação foi criada como Hobby para estudos com Raspiberry + Python, usa
 /currency = Cotacao de moedas (Dólar, Euro, Libra, Bitcoin)</br>
 /uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"</br>
 /version = Versão do Bot</br>
-/print = Envia uma imagem de uma rola</br>
+/print = Envia uma imagem de uma rola "pássaro" será implementado tirar uma print da tela do raspi</br>
 /meme = Envia um link de um meme randômico</br>
 
 Foram utilizados diversos módulos, vários deles já vem instalados por padrão.
