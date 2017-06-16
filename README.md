@@ -11,8 +11,7 @@ Esta aplicação foi criada como Hobby para estudos com Raspiberry + Python, usa
 /uptime = Verifica quanto tempo está ligado o equipamento "Apenas Linux"</br>
 /version = Versão do Bot</br>
 /print = Envia uma imagem de uma rola</br>
-/Meme = Envia um link de um meme randômico</br>
-
+/meme = Envia um link de um meme randômico</br>
 
 Foram utilizados diversos módulos, vários deles já vem instalados por padrão.
 time, random, datetime, os, subprocess, platform, telepot, json, requests 

@@ -109,19 +109,22 @@ def consultarTemperatura(sistemaOP):
 
 #Coletando dados atmoféricos
 def coletarDadosAtmosfericos():
-    dadosColetados = ''
-    url = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
-    teste = json.loads(url.content)
+    try:
+        dadosColetados = ''
+        url = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
+        teste = json.loads(url.content)
 
-    dados_array = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset']
-    informacao_user = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
-    completa = ['°C', '', '', '', '%', '', '', '']
+        dados_array = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset']
+        informacao_user = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
+        completa = ['°C', '', '', '', '%', '', '', '']
 
-    for i in range(0, len(dados_array)):
-        dadosColetados += (informacao_user[i] + str(teste['results'][dados_array[i]]) + completa[i] + '\n').replace(',', '')
+        for i in range(0, len(dados_array)):
+            dadosColetados += (informacao_user[i] + str(teste['results'][dados_array[i]]) + completa[i] + '\n').replace(',', '')
         
-    dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/ at {} {}'.format((teste['results']['date']),(teste['results']['time']))
-    return dadosColetados
+        dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/ at {} {}'.format((teste['results']['date']),(teste['results']['time']))
+        return dadosColetados
+    except:
+        return("Erro ao acessar a API de dados atmosféricos")
 
 #Consultando ajuda no
 def consultarAjuda(sistemOP):
@@ -155,7 +158,7 @@ def cotacaoDolar():
         return(valores)
     
     except:
-        return("Erro ao acessar a API")
+        return("Erro ao acessar a API cotação de moedas")
         #Pode ser colocado outra API na consulta, assim sempre o código vai retornar alguma informação
 
 def tempoLigado(sistemaOP):
