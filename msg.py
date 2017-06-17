@@ -1,8 +1,8 @@
 #coding: utf-8
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-versao = "0.5.4"
-dataVersao = "Última atualização dia 16/06/2017, versão 1"
+versao = "0.5.5"
+dataVersao = "Última atualização dia 17/06/2017, versão 1"
 
 print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
 
@@ -77,7 +77,8 @@ Todas as funções abaixo foram criadas para deixar o código principal limpo, s
 #Gravando o log de comandos
 def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):
     arquivolog = open('log.txt', 'a')
-    arquivolog.write('\n'+ dataMensagemLog + ' ' + usuarioLog + ' comando executado: ' + commandLog + ' ' + sistemaOperacionalLog)
+    arquivolog.write('\n{} {} comando executado {} {}'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
+    #arquivolog.write('\n'+ dataMensagemLog + ' ' + usuarioLog + ' comando executado: ' + commandLog + ' ' + sistemaOperacionalLog)
     arquivolog.close()
 
 #Foi criado esta função para que seja chamada no início do código, futuramente estruturar o código para verificar o sistema operacional
@@ -141,17 +142,17 @@ def cotacaoDolar():
     try:
         requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
         resposta = json.loads(requisicao.text)
-        valores = ''
-        valores += ('Dólar R$' + str(resposta['valores']['USD']['valor']) + '\n'+
-                'Euro R$' + str(resposta['valores']['EUR']['valor']) + '\n'+
-                'Libra R$' + str(resposta['valores']['GBP']['valor']) + '\n'+
-                'Bitcoin R$' + str(resposta['valores']['BTC']['valor']) + '\n\n' +
-                'Generate by http://api.promasters.net.br/cotacao/')
-        return(valores)
+        return('Dólar R${}\nEuro R${}\nLibra R${}\nBitcoin R${}\nGenerate by http://api.promasters.net.br/cotacao/'.format(str(resposta['valores']['USD']['valor']), 
+        str(resposta['valores']['EUR']['valor']), str(resposta['valores']['GBP']['valor']), str(resposta['valores']['BTC']['valor'])))
     
     except:
-        return("Erro ao acessar a API cotação de moedas")
-        #Pode ser colocado outra API na consulta, assim sempre o código vai retornar alguma informação
+        try:
+            req = requests.get("https://economia.awesomeapi.com.br/json/USD-BRL/1")
+            resposta = json.loads(req.text)
+            return("O valor atual do {} é R${}".format(resposta[0]['name'], resposta[0]['high']))
+            
+        except:
+            return("Erro ao acessar a API padrão e API secundária")
 
 def tempoLigado(sistemaOP):
     if (sistemaOP == "Windows"):

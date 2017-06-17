@@ -35,5 +35,6 @@ Foi utilizado outras APIs, com funções diversas como:
 Coleta de dados atmosféricos https://api.hgbrasil.com/weather/
 
 Coleta de dados financeiros em relação a moeda brasileira http://api.promasters.net.br/cotacao/
+A API de cotação tem problemas de conexão, foi inserido uma API reserva que retorna o valor do dólar em reais brasileiros.
 
 #Organizar o documento posteriormente
