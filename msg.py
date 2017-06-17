@@ -1,10 +1,10 @@
 #coding: utf-8
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-versao = "0.5.3"
-dataVersao = "Última atualização dia 12/06/2017, versão 1"
+versao = "0.5.4"
+dataVersao = "Última atualização dia 16/06/2017, versão 1"
 
-print(time.strftime("%d/%m/%Y %H:%M:%S"), "Bot de telegran para Raspi versão: ",versao,"Criado por Frederico Oliveira e Lucas Cassiano")
+print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
 
 tokenColetaTxt = open('token.txt', 'r')
 idToken = tokenColetaTxt.read()
@@ -23,36 +23,29 @@ def handle(msg):
     if (command == '/roll'):
         bot.sendMessage(chat_id, random.randint(1,10))
 
-    elif(command == '/help' or command == '/start'):
-        helpLeitura = consultarAjuda(sistemaOperacional)
-        bot.sendMessage(chat_id, helpLeitura)
+    elif(command == '/help'):
+        bot.sendMessage(chat_id, consultarAjuda(sistemaOperacional))
 
     elif (command == '/time'):
         bot.sendMessage(chat_id, str(datetime.datetime.now()))
 
     elif (command == '/cput'):
-        mensagemTxt = consultarTemperatura(sistemaOperacional)
-        bot.sendMessage(chat_id, mensagemTxt)
+        bot.sendMessage(chat_id, consultarTemperatura(sistemaOperacional))
 
     elif (command == '/loop'):
-        linhas = frasesAleatorias(sistemaOperacional)
-        bot.sendMessage(chat_id, linhas)
+        bot.sendMessage(chat_id, frasesAleatorias(sistemaOperacional))
 	
     elif (command == '/weather'):
-        dadosColetados = coletarDadosAtmosfericos()
-        bot.sendMessage(chat_id, dadosColetados)
+        bot.sendMessage(chat_id, coletarDadosAtmosfericos())
 
     elif (command == '/currency'):
-        mensagemTxt = cotacaoDolar()
-        bot.sendMessage(chat_id, mensagemTxt)
+        bot.sendMessage(chat_id, cotacaoDolar())
 	
     elif (command == '/uptime'):
-        mensagemTxt = tempoLigado(sistemaOperacional)
-        bot.sendMessage(chat_id, mensagemTxt)
+        bot.sendMessage(chat_id, tempoLigado(sistemaOperacional))
 
     elif (command == '/version'):
-        mensagemTxt = "Versão " + versao + ", " + dataVersao
-        bot.sendMessage(chat_id, mensagemTxt)
+        bot.sendMessage(chat_id, "Versão {}, {}".format(versao, dataVersao))
     
     elif (command == '/print'):
         bot.sendMessage(chat_id, "Carregando foto...")
@@ -61,8 +54,7 @@ def handle(msg):
         img.close()
         
     elif (command == '/meme'):
-        mensagemTxt = imagensRandom()
-        bot.sendMessage(chat_id, mensagemTxt)
+        bot.sendMessage(chat_id, imagensRandom())
 
     else:
         bot.sendMessage(chat_id, "Comando não cadastrado")
