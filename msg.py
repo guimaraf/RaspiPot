@@ -68,7 +68,8 @@ bot.message_loop(handle)
 
 print("Aguardando comandos...")
 arquivolog = open('log.txt', 'a')
-arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado p Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
+arquivolog.write('\n\n{} Criado p Frederico Oliveira e Lucas Cassiano versão atual: {}'.format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
+#arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado p Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
 arquivolog.close()
 
 def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#Gravando o log de comandos
