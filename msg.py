@@ -8,7 +8,6 @@ print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico O
 
 tokenColetaTxt = open('token.txt', 'r')
 idToken = tokenColetaTxt.read()
-
 so = platform.system()
 
 def handle(msg):
@@ -18,7 +17,6 @@ def handle(msg):
     dataMensagem = time.strftime('%d/%m/%Y %H:%M:%S')
 
     global versao, dataVersao, so
-
     print('Comando executado: ', command)
     
     if command == '/roll':
@@ -35,25 +33,25 @@ def handle(msg):
 
     elif command == '/loop':
         bot.sendMessage(chat_id, frasesAleatorias(so))
-	
+
     elif command == '/weather':
         bot.sendMessage(chat_id, coletarDadosAtmosfericos())
 
     elif command == '/currency':
         bot.sendMessage(chat_id, cotacaoDolar())
-	
+
     elif command == '/uptime':
         bot.sendMessage(chat_id, tempoLigado(so))
 
     elif command == '/version':
         bot.sendMessage(chat_id, "Versão {}, {}".format(versao, dataVersao))
-    
+
     elif command == '/print':
         bot.sendMessage(chat_id, "Carregando foto...")
         img = open('img/rola.jpg', 'rb')
         bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
         img.close()
-        
+
     elif command == '/meme':
         bot.sendMessage(chat_id, imagensRandom())
 
@@ -116,7 +114,6 @@ def frasesAleatorias(sistemOP):
         lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
     else:
         lines = open('temp/frases.txt', 'r').read().splitlines()
-            
     lines = random.choice(lines)
     return lines
     lines.close()
@@ -133,7 +130,6 @@ def cotacaoDolar():
             req = requests.get("https://economia.awesomeapi.com.br/json/USD-BRL/1")
             resposta = json.loads(req.text)
             return("O valor atual do {} é R${}".format(resposta[0]['name'], resposta[0]['high']))
-            
         except:
             return("Erro ao acessar a API padrão e API secundária")
 
@@ -141,11 +137,8 @@ def tempoLigado(sistemaOP):
     if sistemaOP == "Windows":
         mensagemTxt = "Comando não encontrado no Windows"
     else:
-        os.system("uptime > temp/temp.txt")
-        mensagemTxt = open('temp/temp.txt', 'r').read()
-        arquivo = open('temp.txt', 'r') 
+        mensagemTxt = subprocess.check_output(["uptime"])
     return mensagemTxt
-    arquivo.close()
 
 def imagensRandom():
     lines = open('temp/imagens.txt', 'r').read().splitlines()
