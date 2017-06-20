@@ -73,7 +73,7 @@ arquivolog.close()
 
 def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#Gravando o log de comandos
     arquivolog = open('log.txt', 'a')
-    arquivolog.write('{} {} comando executado {} {}'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
+    arquivolog.write('{} {} comando executado {} {}\n'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
     arquivolog.close()
 
 def consultarTemperatura(sistemaOP):
