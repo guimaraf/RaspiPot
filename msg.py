@@ -60,7 +60,7 @@ def handle(msg):
     else:
         bot.sendMessage(chat_id, "Comando não cadastrado")
         
-    print(usuario, dataMensagem, '\n')
+    print(usuario, dataMensagem)
     GravarLog(so, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
 
 bot = telepot.Bot(idToken)
@@ -69,12 +69,11 @@ bot.message_loop(handle)
 print("Aguardando comandos...")
 arquivolog = open('log.txt', 'a')
 arquivolog.write('\n\n{} Criado p Frederico Oliveira e Lucas Cassiano versão atual: {}'.format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
-#arquivolog.write('\n\n' + time.strftime("%d/%m/%Y %H:%M:%S") +  " Criado p Frederico Oliveira e Lucas Cassiano versão atual: " + versao) #Log inicial
 arquivolog.close()
 
 def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#Gravando o log de comandos
     arquivolog = open('log.txt', 'a')
-    arquivolog.write('\n{} {} comando executado {} {}'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
+    arquivolog.write('{} {} comando executado {} {}'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
     arquivolog.close()
 
 def consultarTemperatura(sistemaOP):
