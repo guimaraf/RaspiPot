@@ -4,10 +4,9 @@ import time, random, datetime, telepot, os, subprocess, json, requests, platform
 versao = "0.5.6"
 dataVersao = "Última atualização dia 18/06/2017, versão 1"
 
-print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
+print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.\n".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
 
-tokenColetaTxt = open('token.txt', 'r')
-idToken = tokenColetaTxt.read()
+tokenColetaTxt = open('token.txt', 'r').read()
 so = platform.system()
 
 def handle(msg):
@@ -16,7 +15,6 @@ def handle(msg):
     command = msg['text']
     dataMensagem = time.strftime('%d/%m/%Y %H:%M:%S')
 
-    global versao, dataVersao, so
     print('Comando executado: ', command)
     
     if command == '/roll':
@@ -61,12 +59,12 @@ def handle(msg):
     print(usuario, dataMensagem)
     GravarLog(so, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
 
-bot = telepot.Bot(idToken)
+bot = telepot.Bot(tokenColetaTxt)
 bot.message_loop(handle)
 
 print("Aguardando comandos...")
 arquivolog = open('log.txt', 'a')
-arquivolog.write('\n\n{} Criado p Frederico Oliveira e Lucas Cassiano versão atual: {}'.format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
+arquivolog.write('\n\n{} Criado p Frederico Oliveira e Lucas Cassiano versão atual: {}\n'.format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
 arquivolog.close()
 
 def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#Gravando o log de comandos
