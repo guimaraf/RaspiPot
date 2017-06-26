@@ -1,5 +1,9 @@
+/__pycache__
+/.idea
 .git
 /Site
 /tempFiles
+/.vscode
+/testes
 token.txt
 log.txt

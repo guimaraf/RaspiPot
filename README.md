@@ -64,6 +64,8 @@ This application was created as a Hobby for studies with Raspberry Pi + Python, 
 /print = Send an image of "bird" will be implemented to send traffic reports of the network interface with the application "vnststi" </br>
 /meme = Send a link from a random meme </br>
 
+Adicionado resolvedor de operações matemáticas, sendo necessário apenas informar o que quer resolver, usando os caracteres de operações em python.
+
 <b>MODULES</b>
 Many modules have been used, some are already installed by default.
 Time, random, datetime, os, subprocess, platform, telepot, json, requests

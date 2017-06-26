@@ -10,3 +10,4 @@ Comandos cadastrados
 /version = Versão do Bot
 /print = Envia uma imagem de uma rola
 /meme = Envia um link de um meme randômico
+Operações matemáticas agora são suportadas, exemplo 5*5

