@@ -13,6 +13,12 @@ Esta aplicação foi criada como Hobby para estudos com Raspberry Pi + Python, u
 /print = Envia uma imagem de uma rola "pássaro" será implementado para envio de relatórios de trafego da interface de rede com a aplicação "vnststi" </br>
 /meme = Envia um link de um meme randômico</br>
 
+Adicionado resolvedor de operações matemáticas, sendo necessário apenas informar o que quer resolver, usando os caracteres de operações em python. 
+Por exemplo 
+5*5 ou 5**3 ou 3 + 4
+
+A conta será resolvida e o retorno no telegram, será o resultado da soma.
+
 <b>MODULOS</b>
 Foram utilizados diversos módulos, vários deles já vem instalados por padrão.
 time, random, datetime, os, subprocess, platform, telepot, json, requests 
@@ -45,7 +51,6 @@ API:http://api.promasters.net.br/cotacao/ Retorna as seguintes moedas Dólar, Eu
 Caso a API de cotação apresente problemas de conexão, foi inserido uma API reserva https://economia.awesomeapi.com.br/json/USD-BRL/1 que retorna o apenas valor do dólar em reais brasileiros.
 
 
-
 # English version
 
 <b>RaspiPot</b>
@@ -64,7 +69,11 @@ This application was created as a Hobby for studies with Raspberry Pi + Python, 
 /print = Send an image of "bird" will be implemented to send traffic reports of the network interface with the application "vnststi" </br>
 /meme = Send a link from a random meme </br>
 
-Adicionado resolvedor de operações matemáticas, sendo necessário apenas informar o que quer resolver, usando os caracteres de operações em python.
+Added solver of mathematical operations, being necessary only to inform what it wants to solve, using the characters of operations in python.
+For example
+5 * 5 or 5 ** 3 or 3 + 4
+
+The account will be resolved and the return on the telegram will be the result of the sum.
 
 <b>MODULES</b>
 Many modules have been used, some are already installed by default.
@@ -94,6 +103,3 @@ Collection of financial data in relation to Brazilian currency
 
 API: http: //api.promasters.net.br/cotacao/ Returns the following currency Dollar, Euro, Libra, Bitcoin
 If the quotation API presents connection problems, a reserve API has been inserted https://economia.awesomeapi.com.br/json/USD-BRL/1 which returns the only dollar value in BRL.
-
-
-#English version not completed
