@@ -1,8 +1,8 @@
 #coding: utf-8
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-versao = "0.5.6"
-dataVersao = "Última atualização dia 18/06/2017, versão 1"
+versao = "0.6.1"
+dataVersao = "Última atualização dia 06/01/2018"
 
 print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.\n".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
 
@@ -96,14 +96,12 @@ def consultarTemperatura(sistemaOP):
             tempGpu = os.system("/opt/vc/bin/vcgencmd measure_temp  > temp/gpu.txt")
             gpu = open("temp/gpu.txt", "r").read()
 
-            temperatura = dataRaspi
+            temperatura = "{} {} CPU => {:.1f}'C \n GPU => {}".format(dataRaspi, usuario, float(cpu)/1000, gpu)
 
-            """os.system("Shell/my-pi-temp.sh > temp/temp.txt")
-            temperatura = open('temp/temp.txt', 'r').read()"""
         return temperatura
         temperatura.close()
     except:
-        return("Script para coletar temperatura do processador está sem permissão de execução, execute o comando 'sudo chmod +x my-pi-temp.sh' para dar a permissão necessária")
+        return("Erro ao acessar dados de temperatura do hardware do raspiberry")
 
 def coletarDadosAtmosfericos():
     try:
