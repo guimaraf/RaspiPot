@@ -76,13 +76,34 @@ def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#G
     arquivolog.close()
 
 def consultarTemperatura(sistemaOP):
-    if sistemaOP == "Windows":
-        temperatura = "Não existe o comando no Windows" 
-    else:
-        os.system("Shell/my-pi-temp.sh > temp/temp.txt")
-        temperatura = open('temp/temp.txt', 'r').read()
-    return temperatura
-    temperatura.close()
+    try:
+        if sistemaOP == "Windows":
+            temperatura = "Não implementado coletagem de dados de temperatura de hardware no windows" 
+        else:
+            dataRaspi = "", 
+            tempData = ""
+            usuario = ""
+            tempUsuario = ""
+            cpu = ""
+            gpu = ""
+            tempGpu = ""
+
+            tempData = os.system("date > temp/nome.txt")
+            dataRaspi = open("temp/nome.txt", "r").read()
+            tempUsuario = os.system("hostname > temp/user.txt")
+            usuario = open("temp/user.txt", "r").read()
+            cpu = open("/sys/class/thermal/thermal_zone0/temp").read()
+            tempGpu = os.system("/opt/vc/bin/vcgencmd measure_temp  > temp/gpu.txt")
+            gpu = open("temp/gpu.txt", "r").read()
+
+            temperatura = dataRaspi
+
+            """os.system("Shell/my-pi-temp.sh > temp/temp.txt")
+            temperatura = open('temp/temp.txt', 'r').read()"""
+        return temperatura
+        temperatura.close()
+    except:
+        return("Script para coletar temperatura do processador está sem permissão de execução, execute o comando 'sudo chmod +x my-pi-temp.sh' para dar a permissão necessária")
 
 def coletarDadosAtmosfericos():
     try:
