@@ -1,135 +1,135 @@
 #coding: utf-8
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-versao = "0.6.1"
-dataVersao = "Última atualização dia 06/01/2018"
+version = "0.6.1"
+dateVersion = "Last day update 10/06/2019"
 
-print("{}\n\nBot de telegran para Raspiberry versão: {}, criado por Frederico Oliveira e Lucas Cassiano.\n".format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
+print("{}\n\nBot of telegram for Raspberry version: {}, created by Frederico Oliveira and Lucas Cassiano.\n".format(time.strftime("%d/%m/%Y %H:%M:%S"), version))
 
-tokenColetaTxt = open('token.txt', 'r').read()
+tokenCollectTxtFile = open('token.txt', 'r').read()
 so = platform.system()
 
 def handle(msg):
     chat_id = msg['chat']['id']
-    usuario = msg['chat']['username'] #adicionado outra chamada de informações do telegran, agora o username
+    user = msg['chat']['username']
     command = msg['text']
     dataMensagem = time.strftime('%d/%m/%Y %H:%M:%S')
 
-    print('Comando executado: ', command)
+    print('Command executed: ', command)
     
     if command == '/roll':
         bot.sendMessage(chat_id, random.randint(1,10))
 
     elif command == '/help':
-        bot.sendMessage(chat_id, consultarAjuda(so))
+        bot.sendMessage(chat_id, ConsultHelpFile(so))
 
     elif command == '/time':
         bot.sendMessage(chat_id, str(datetime.datetime.now()))
 
     elif command == '/cput':
-        bot.sendMessage(chat_id, consultarTemperatura(so))
+        bot.sendMessage(chat_id, CollectTemperatureExternalAPI(so))
 
     elif command == '/loop':
-        bot.sendMessage(chat_id, frasesAleatorias(so))
+        bot.sendMessage(chat_id, RandoomPhrases(so))
 
     elif command == '/weather':
-        bot.sendMessage(chat_id, coletarDadosAtmosfericos())
+        bot.sendMessage(chat_id, CollectAtmosphericData())
 
     elif command == '/currency':
-        bot.sendMessage(chat_id, cotacaoDolar())
+        bot.sendMessage(chat_id, PriceDolar())
 
     elif command == '/uptime':
-        bot.sendMessage(chat_id, tempoLigado(so))
+        bot.sendMessage(chat_id, AmountTimeOn(so))
 
     elif command == '/version':
-        bot.sendMessage(chat_id, "Versão {}, {}".format(versao, dataVersao))
+        bot.sendMessage(chat_id, "Versão {}, {}".format(version, dateVersion))
 
     elif command == '/print':
-        bot.sendMessage(chat_id, "Carregando foto...")
+        bot.sendMessage(chat_id, "Loading photo...")
         img = open('img/rola.jpg', 'rb')
         bot.sendPhoto(chat_id, img, caption=None, disable_notification=None, reply_to_message_id=None, reply_markup=None)
         img.close()
 
     elif command == '/meme':
-        bot.sendMessage(chat_id, imagensRandom())
+        bot.sendMessage(chat_id, ImagensRandom())
 
     else:
         try:
             bot.sendMessage(chat_id, eval(command))
         except:
-            bot.sendMessage(chat_id, "Comando não cadastrado")
+            bot.sendMessage(chat_id, "Command not registered")
 
-    print(usuario, dataMensagem)
-    GravarLog(so, dataMensagem, usuario, command) #Sempre quando enviar uma mensagem será gravado um log
+    print(user, dataMensagem)
+    RecordLog(so, dataMensagem, user, command) #Always when sending a message will be saved a log
 
-bot = telepot.Bot(tokenColetaTxt)
+bot = telepot.Bot(tokenCollectTxtFile)
 bot.message_loop(handle)
 
-print("Aguardando comandos...")
-arquivolog = open('log.txt', 'a')
-arquivolog.write('\n\n{} Criado p Frederico Oliveira e Lucas Cassiano versão atual: {}\n'.format(time.strftime("%d/%m/%Y %H:%M:%S"), versao))
-arquivolog.close()
+print("Waiting for commands...")
+fileLog = open('log.txt', 'a')
+fileLog.write('\n\n{} Created by Frederico Oliveira and Lucas Cassiano Current version: {}\n'.format(time.strftime("%d/%m/%Y %H:%M:%S"), version))
+fileLog.close()
 
-def GravarLog(sistemaOperacionalLog, dataMensagemLog, usuarioLog, commandLog):#Gravando o log de comandos
-    arquivolog = open('log.txt', 'a')
-    arquivolog.write('{} {} comando executado {} {}\n'.format(dataMensagemLog, usuarioLog, commandLog, sistemaOperacionalLog))
-    arquivolog.close()
+def RecordLog(logOperatingSystem, dateMessageLog, userLog, commandLog):
+    fileLog = open('log.txt', 'a')
+    fileLog.write('{} {} command executed {} {}\n'.format(dateMessageLog, userLog, commandLog, logOperatingSystem))
+    fileLog.close()
 
-def consultarTemperatura(sistemaOP):
+def CollectTemperatureExternalAPI(opSystem):
     try:
-        if sistemaOP == "Windows":
-            temperatura = "Não implementado coletagem de dados de temperatura de hardware no windows" 
+        if opSystem == "Windows":
+            temperature = "Not implemented hardware temperature data collection in windows." 
         else:
             dataRaspi = "", 
             tempData = ""
-            usuario = ""
-            tempUsuario = ""
+            user = ""
+            tempUser = ""
             cpu = ""
             gpu = ""
             tempGpu = ""
 
             tempData = os.system("date > temp/nome.txt")
             dataRaspi = open("temp/nome.txt", "r").read()
-            tempUsuario = os.system("hostname > temp/user.txt")
-            usuario = open("temp/user.txt", "r").read()
+            tempUser = os.system("hostname > temp/user.txt")
+            user = open("temp/user.txt", "r").read()
             cpu = open("/sys/class/thermal/thermal_zone0/temp").read()
             tempGpu = os.system("/opt/vc/bin/vcgencmd measure_temp  > temp/gpu.txt")
             gpu = open("temp/gpu.txt", "r").read()
 
-            temperatura = "{} {} CPU => {:.1f}'C \n GPU => {}".format(dataRaspi, usuario, float(cpu)/1000, gpu)
+            temperature = "{} {} CPU => {:.1f}'C \n GPU => {}".format(dataRaspi, user, float(cpu)/1000, gpu)
 
-        return temperatura
-        temperatura.close()
+        return temperature
+        temperature.close()
     except:
-        return("Erro ao acessar dados de temperatura do hardware do raspiberry")
+        return("Error accessing raspberry hardware temperature data.")
 
-def coletarDadosAtmosfericos():
+def CollectAtmosphericData():
     try:
-        dadosColetados = ''
-        url = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
-        teste = json.loads(url.content)
+        collectedData = ''
+        requestJson = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
+        stringJsonBase = json.loads(requestJson.content)
 
-        dados_array = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset']
-        informacao_user = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
-        completa = ['°C', '', '', '', '%', '', '', '']
+        previousComplement = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
+        dataArray = ['temp','description','currently','city','humidity','wind_speedy','sunrise','sunset']
+        finalComplement = ['°C', '', '', '', '%', '', '', '']
 
-        for i in range(0, len(dados_array)):
-            dadosColetados += (informacao_user[i] + str(teste['results'][dados_array[i]]) + completa[i] + '\n').replace(',', '')
+        for i in range(0, len(dataArray)):
+            collectedData += (previousComplement[i] + str(stringJsonBase['results'][dataArray[i]]) + finalComplement[i] + '\n').replace(',', '')
         
-        dadosColetados += 'Generate with: https://api.hgbrasil.com/weather/ at {} {}'.format((teste['results']['date']),(teste['results']['time']))
-        return dadosColetados
+        collectedData += 'Generate with: https://api.hgbrasil.com/weather/ at {} {}'.format((stringJsonBase['results']['date']),(stringJsonBase['results']['time']))
+        return collectedData
     except:
-        return("Erro ao acessar a API de dados atmosféricos")
+        return("Error accessing the Atmospheric Data API.")
 
-def consultarAjuda(sistemOP):
+def ConsultHelpFile(sistemOP):
     if sistemOP == "Windows":
-        arquivoHelp = open('temp/help.txt', 'r', encoding='utf-8').read()
+        helpFile = open('temp/help.txt', 'r', encoding='utf-8').read()
     else:
-        arquivoHelp = open('temp/help.txt', 'r').read()
-    return arquivoHelp
-    arquivoHelp.close()
+        helpFile = open('temp/help.txt', 'r').read()
+    return helpFile
+    helpFile.close()
 
-def frasesAleatorias(sistemOP):
+def RandoomPhrases(sistemOP):
     if sistemOP == "Windows":
         lines = open('temp/frases.txt', 'r', encoding='utf-8').read().splitlines()
     else:
@@ -138,29 +138,29 @@ def frasesAleatorias(sistemOP):
     return lines
     lines.close()
 
-def cotacaoDolar():
+def PriceDolar():
     try:
-        requisicao = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
-        resposta = json.loads(requisicao.text)
-        return('Dólar R${}\nEuro R${}\nLibra R${}\nBitcoin R${}\nGenerate by http://api.promasters.net.br/cotacao/'.format(str(resposta['valores']['USD']['valor']), 
-        str(resposta['valores']['EUR']['valor']), str(resposta['valores']['GBP']['valor']), str(resposta['valores']['BTC']['valor'])))
+        requestJson = requests.get("http://api.promasters.net.br/cotacao/v1/valores")
+        stringJsonBase = json.loads(requestJson.text)
+        return('Dólar R${}\nEuro R${}\nLibra R${}\nBitcoin R${}\nGenerate by http://api.promasters.net.br/cotacao/'.format(str(stringJsonBase['valores']['USD']['valor']), 
+        str(stringJsonBase['valores']['EUR']['valor']), str(stringJsonBase['valores']['GBP']['valor']), str(stringJsonBase['valores']['BTC']['valor'])))
     
     except:
         try:
-            req = requests.get("https://economia.awesomeapi.com.br/json/USD-BRL/1")
-            resposta = json.loads(req.text)
-            return("O valor atual do {} é R${}".format(resposta[0]['name'], resposta[0]['high']))
+            requestJsonExtra = requests.get("https://economia.awesomeapi.com.br/json/USD-BRL/1")
+            stringJsonBase = json.loads(requestJsonExtra.text)
+            return("The current value of the {} é R${}".format(stringJsonBase[0]['name'], stringJsonBase[0]['high']))
         except:
-            return("Erro ao acessar a API padrão e API secundária")
+            return("Error accessing standard API and secondary API.")
 
-def tempoLigado(sistemaOP):
-    if sistemaOP == "Windows":
-        mensagemTxt = "Comando não encontrado no Windows"
+def AmountTimeOn(opSystem):
+    if opSystem == "Windows":
+        messageTxt = "Command Not Found in Windows."
     else:
-        mensagemTxt = subprocess.check_output(["uptime"])
-    return mensagemTxt
+        messageTxt = subprocess.check_output(["uptime"])
+    return messageTxt
 
-def imagensRandom():
+def ImagensRandom():
     lines = open('temp/imagens.txt', 'r').read().splitlines()
     lines = random.choice(lines)
     return lines
