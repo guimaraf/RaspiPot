@@ -103,3 +103,5 @@ Collection of financial data in relation to Brazilian currency
 
 API: http: //api.promasters.net.br/cotacao/ Returns the following currency Dollar, Euro, Libra, Bitcoin
 If the quotation API presents connection problems, a reserve API has been inserted https://economia.awesomeapi.com.br/json/USD-BRL/1 which returns the only dollar value in BRL.
+
+[![N|Solid](https://raw.githubusercontent.com/guimaraf/guimaraf.github.io/master/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T6D35D68JGL8E&source=url)
