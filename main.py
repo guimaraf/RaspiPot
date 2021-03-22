@@ -1,8 +1,8 @@
 #coding: utf-8
 import time, random, datetime, telepot, os, subprocess, json, requests, platform
 
-version = "0.6.1"
-dateVersion = "Last day update 10/06/2019"
+version = "0.6.2"
+dateVersion = "Last day update 22/03/2021"
 
 print("{}\n\nBot of telegram for Raspberry version: {}, created by Frederico Oliveira and Lucas Cassiano.\n".format(time.strftime("%d/%m/%Y %H:%M:%S"), version))
 
@@ -11,7 +11,7 @@ so = platform.system()
 
 def handle(msg):
     chat_id = msg['chat']['id']
-    user = msg['chat']['username']
+    user = msg['chat']['first_name'] + ' ' + msg['chat']['last_name']
     command = msg['text']
     dataMensagem = time.strftime('%d/%m/%Y %H:%M:%S')
 
@@ -24,7 +24,8 @@ def handle(msg):
         bot.sendMessage(chat_id, ConsultHelpFile(so))
 
     elif command == '/time':
-        bot.sendMessage(chat_id, str(datetime.datetime.now()))
+        timeNow = str(datetime.datetime.now())
+        bot.sendMessage(chat_id, timeNow[0:19])
 
     elif command == '/cput':
         bot.sendMessage(chat_id, CollectTemperatureExternalAPI(so))
@@ -105,8 +106,9 @@ def CollectTemperatureExternalAPI(opSystem):
 
 def CollectAtmosphericData():
     try:
+        city = '458700' #Betim MG
         collectedData = ''
-        requestJson = requests.get('https://api.hgbrasil.com/weather/?format=json&cid=BRXX0033')
+        requestJson = requests.get('https://api.hgbrasil.com/weather?woeid=' + city)
         stringJsonBase = json.loads(requestJson.content)
 
         previousComplement = ['Temperatura: ', 'Condicao tempo: ', 'Periodo: ', 'Cidade: ', 'Umidade do ar: ', 'Velocidade do vento: ', 'Nascimento do sol: ', 'Por do sol: ']
