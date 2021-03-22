@@ -1,0 +1,53 @@
+div {
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-family: sans-serif;
+    font-size: 14pt;
+}
+div b{
+    font: bold;
+    font-family: sans-serif;
+    font-size: 18pt;
+    text-decoration: underline;
+}
+
+div p#titulo{
+    font-size: 18pt;
+}
+
+div li:hover{
+    border-radius : 0px 0px 0px 0px ;
+	border-width : 0px 0px 0px 0px ;
+	border-style : solid solid solid solid;
+	border-color : rgba(179,102,179,1) rgba(179,102,179,1) rgba(179,102,179,1) rgba(179,102,179,1) ;
+	-webkit-box-shadow : 0px 0px 20px 0px rgba(50,50,50,1) ;
+	-moz-box-shadow : 0px 0px 20px 0px rgba(50,50,50,1) ;
+	-ms-box-shadow : 0px 0px 20px 0px rgba(50,50,50,1) ;
+	-o-box-shadow : 0px 0px 20px 0px rgba(50,50,50,1) ;
+	box-shadow : 0px 0px 20px 0px rgba(50,50,50,1) ;
+}
+
+img{
+    height: 25%;
+    width: 25%;
+
+}
+
+footer p{
+    text-align: center;
+    font: bold;
+    font-size: 16pt;
+    text-shadow: black 0.01em 0.01em 0.02em;
+    
+}
+a {
+    color: blue;
+}
+
+code#Linux{
+    color: green;
+}
+code#Python{
+    color: red;
+}

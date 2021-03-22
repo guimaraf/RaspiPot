@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Notas das versões do Bot Telegram</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+      <div>
+        <a href="https://github.com/nickoala/telepot" target="_blank" title="Telegram Bot Whith Python using Telepot" > <img src="./imagem/TelegramPython.png" alt"image" /></a></br></br>
+        
+        <p id="titulo">Estamos fazendo o controle de atualizações por meio deste HTML responsivo, facilitando acompanhar cada mudança no código.</p>
+        
+        </br><b>Versão 0.6.2 dia 22/03/2021</b>
+        <p>
+            <Li>Alterado o comando da linha 14, onde requisitava o nome do usuário e a API estava retornando como erro, agora é chamado o primeiro nome e o nome 
+                final do usuário para registrar no log.</li>
+            <code>user = msg['chat']['first_name'] + ' ' + msg['chat']['last_name']</code>
+            
+            <br><br>
+
+            <Li>A chamada <code>/time</code> estava retornando com alguns caracteres a mais, adicionado uma variável para coletar o tempo, depois tratamento retirando 
+                os caracteres desnecessários.</li><br>
+
+            <code>elif command == '/time': <br>
+                timeNow = str(datetime.datetime.now())<br>
+                bot.sendMessage(chat_id, timeNow[0:19])</code>
+
+            <br>
+            <br>
+            
+            <li>Alterado o json para coleta de dados atmosféricos, também foi criado uma variável para receber o código da cidade, o código atual fará a coleta de dados da 
+                Cidade Betim, Minas Gerais, para que seja feito a busca por outra cidade, basta ir no 
+                link <a href="https://console.hgbrasil.com/documentation/weather/tools">Buscar Cindade</a>, com o código da cidade, altere o valor da variável 'city'</li>
+            <br>
+            <code>https://api.hgbrasil.com/weather?woeid=458700</code>
+        </p>
+
+
+        </br><b>Versão 0.6.1 dia 06/02/2018</b>
+        <p>
+            <Li>Retirado a necessidade de executar o shell para coletar dados de temperatura do hardware, agora tudo é feito via python.</li>
+        </p>
+
+        </br><b>Versão 0.5.6 dia 18/06/2017</b>
+        <p>
+            <Li>Adotado sistema de versão baseado no padrão de desenvolvimento de software.</li>
+            <Li>Adicionado uma API reserva para consulta de dados climáticos.</li>
+            <Li>Adicionado o comando eval(), que realiza expressões válidas caso seja enviado para a API do telegran uma expressão que o python executa.</li>
+        </p>
+
+        </br><b>Versão 19032017.1</b>
+        <p>
+            <Li>Modificado a função que retorna as cotações, agora é feito somente em python e com resposta praticamente instantânea.</li>
+            <Li>Guardado o código antigo na pasta "Pequenos Códigos".</li>
+            <Li>Adicionado Libra na contação, que também já possui Bitcoin.</li>
+        </p>
+
+        </br><b>Versão 18032017.1</b>
+        <p>
+            <Li>Modificado a função de buscar dados atmoféricos, agora retirando o if e usando for, fica levemente mais rápido, principalmente o código se torna mais legível.</li>
+        </p>
+
+        </br><b>Versão 13032017.1</b>
+        <p>
+            <Li>Convertido o restante das funções para fazer os processos em funções externas.</li>
+            <Li>Corrigido um bug da função para retornar a temperatura do equipamento, comando utilizado <code id="Linux">"/opt/vc/bin/vcgencmd measure_temp"</code> desta forma retorna já no formato de graus celcius.</li>
+        </p>
+
+        </br><b>Versão 12032017.1</b>
+        <p>
+            <Li>Obs. Depois de um tempo sem tocar no código, resolvi continuar as mudanças já planejadas.</li>
+            <Li>Iniciado o processo de deixar todos os processos no Python, no máximo coletar informações do shell, desta forma vai otimizar a comuinicação equipamento/telegram.</li>
+            <Li>Criado uma nova função para coletar dados atmosféricos, retornando apenas a string já formatada para enviar para o Telegram.</li>
+        </p>
+
+        <b>Versão 0602017.1</b>
+        <p>
+            <Li>Correção de bug que nao exibia o por do sol no comando /weather.</li>
+            <Li>Adicionado bibliotecas import json, import requests, deste modo é solicitado previsao do tempo diretamenta da <a href="https://hgbrasil.com/status/weather/" target="_blank" title="Link para API usada">API HgBrasil Weather</a></li>
+            <Li>Comando /start definido com mesma função do comando /help</li>
+            <Li>outras correções menores</li>
+        </p>
+
+        <b>Versão  0502017.x</b>
+        <p>
+            <Li>Otimização de codigo</li>
+            <Li>Outras correções menores</li>
+        </p>
+
+        <b>Versão 040217.7</b>
+            <p>
+                <Li>Criado log, que já é gravado no arquivo log.txt, já pulando a linha, colocando o nome do usuário, data, hora e o comando digitado.</li>
+                <Li>Adicionado o fechamendo dos arquivos, após estrair a informação necessária.</li>
+                <Li>Adicionado uma linha no print para que seja melhor visualizado quando o código estiver rodando.</li>
+            </p>
+
+        <b>Versão 040217.6</b>
+            <p>
+                <Li>Modificado o comando para retornar a data da mensagem, antes era no início do comando, agora retorna no final da função, junto com o nome do usuário que solicitou.</li>
+                <Li>Criado mais 2 variáveis, dataMensagem e username</li>
+            </p>
+
+        <b>Versão 040217.5</b>
+            <p>
+                <Li>Adicionado o retorno do nome do usuário</li>
+            </p>
+
+        <b>Versão 04022017.2</b>
+            <p>
+                <Li>Modificado o arquivo .txt para chamar apenas 1, como ele será dinâmico, não tem necessidade de serem diferentes.</li>
+                <Li>Corrigido o bug da saída do currency</li>
+            </p>
+
+        <b>Versão 040217.1</b>
+            <p>
+                <Li>Adicionado formatação para o tratamento das informações de tempo para o comando /weather.</li>
+            </p>
+
+        <b>Versão 030217.3</b>
+            <p>
+                <Li>Adicionado comandos, uptime, weather, currency.</li>
+            </p>
+
+        <b>Versão 300117.1</b>
+            <p>
+                <Li>Adicionado comentario com tipo de "encoding:"  <code id="Python"> #This Python file uses the following encoding: utf-8</code></li>
+                <Li>Adicionado biblioteca import os.</li>
+                <Li>Adicionado função para rodar Shell dentro do linux no comando /cpuz arquivo help atualizado.</li>
+                <Li>Nova nomenclatura adotada para o versionamento do projeto, agora será no formato DMA dia mês e ano, seguido da quantidade de vezes que foi atualizado no mesmo dia o projeto</li>
+            </p>
+
+        <b>Versão 0.1.1</b>
+            <p>
+                <Li>Versão original, criado arquivos para leitura, modificado código e relção ao original.</li>
+            </p>
+      </div>
+      <footer>
+          <p></br>Todos os Direitos reservados a Fred Oliveira e Lucas Cassiano</p>
+      </footer>
+  </body>
+
+
+</html>

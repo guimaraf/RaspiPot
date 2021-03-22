@@ -106,7 +106,7 @@ def CollectTemperatureExternalAPI(opSystem):
 
 def CollectAtmosphericData():
     try:
-        city = '458700' #Betim MG
+        city = '458700' # / Betim MG - 458700/ Belo Horizonte, MG - 455821 / São Paulo, SP - 455827/
         collectedData = ''
         requestJson = requests.get('https://api.hgbrasil.com/weather?woeid=' + city)
         stringJsonBase = json.loads(requestJson.content)
